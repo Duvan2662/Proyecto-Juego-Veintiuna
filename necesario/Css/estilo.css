@@ -1,0 +1,24 @@
+html, body {
+    margin: 0px;
+    background-color: #326771; /*Color del fondo */
+    color: white;
+}
+
+.titulo {
+    text-align: center;
+    background-color: #CDD3D5; /*Color del titulo */
+    color: black;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.carta { /* Como quiero que se me muestren las cartas*/
+    position: relative;
+    width: 150px;
+    left:100px;
+    margin-left: -75px;
+}
+
+#computadora-cartas, #jugador-cartas{ /*alto entre el jugador1 y la computadora*/
+    height: 260px;
+}
