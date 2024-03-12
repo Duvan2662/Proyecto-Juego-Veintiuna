@@ -20,6 +20,7 @@ const especiales = ['A','J','Q','K']; //Tipos de carta
 
 //Referencias del DOM
 const btnpedir          = document.querySelector('#btnPedir');
+const btndetener        = document.querySelector('#btnDetener');
 const actualizarPuntos  = document.querySelectorAll('small');
 const barajaJugador     = document.querySelector('#jugador-cartas');
 const barajaComputadora = document.querySelector('#computadora-cartas');
@@ -56,7 +57,6 @@ const tomarCarta = () =>{
     if(baraja.length === 0){
         throw 'No ahi cartas en la baraja'
     }
-
 
     const carta = baraja.pop();//Elimina el ultimo elemento de un array 
     return carta;//retorna la carta  
@@ -150,17 +150,23 @@ btnpedir.addEventListener('click', () => {
 
 
     if(puntosJugador > 21){
-        console.error('PERDISTE');
         btnpedir.disabled = true;//bloque el boton pedir
         btndetener.disabled = true;//bloque el boton detener
         turnoComputadora(puntosJugador);//Funcion para que juege la computadora 
     }else if(puntosJugador === 21){
-        console.warn('LLEGASTE A 21 GENIAL !!!!!!1');
         btnpedir.disabled = true;//bloque el boton pedir
         btndetener.disabled = true;//bloque el boton detener
         turnoComputadora(puntosJugador);//Funcion para que juege la computadora 
     }
     
+})
+
+
+//Evento de detener
+btndetener.addEventListener('click', ()=> {
+    btnpedir.disabled = true;//bloque el boton pedir
+    btndetener.disabled = true;//bloque el boton detener
+    turnoComputadora (puntosJugador);//Funcion para que juege la computadora 
 })
 
 
