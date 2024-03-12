@@ -38,7 +38,6 @@ const crearBaraja = () =>{
 crearBaraja();
 
 
-
 //Tomar una nueva carta 
 const tomarCarta = () =>{
     //Si se acaban las cartas en la baraja
@@ -50,3 +49,29 @@ const tomarCarta = () =>{
     const carta = baraja.pop();//Elimina el ultimo elemento de un array 
     return carta;//retorna la carta  
 };
+
+
+const valorCarta = (carta) => {
+
+    let puntos = 0; //Valor en puntos de cada carta 
+    
+    //Necestio tomar el primer valor de la carta 2,3,4,5 o 10 entonces siempre va a ir desde la posicion 0 hasta la posicion final menos 1 para el 10 
+    let valor = carta.substring(0,carta.length-1);
+
+    //Mira si el valor es un numero
+    if(isNaN(valor)){ 
+        //Entra si NO es un numero el valor 
+        if(valor == 'A'){
+            puntos = 11;
+        }else{
+            puntos = 10;
+        }
+
+    }else{
+        //Entra si ES un numero el valor 
+        puntos = parseInt(valor,10); //Paso el valor a entero 
+    }
+    console.log(puntos);
+    return puntos;
+};
+
