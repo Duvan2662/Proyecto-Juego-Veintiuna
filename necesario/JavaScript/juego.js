@@ -14,6 +14,7 @@ const tipos      = ['C','D','T','P']; //Tipos de carta
 const especiales = ['A','J','Q','K']; //Tipos de carta
 
 
+//Crear baraja de cartas
 const crearBaraja = () =>{
     
     //Llena el arreglo de baraja con los nueros del 2 al 10 y los diferentes tipos de carta(c,d,h,s) ejemlo: (2C,3D,4T)
@@ -29,9 +30,23 @@ const crearBaraja = () =>{
         }
     }
 
-    
+
     baraja = _.shuffle (baraja); //Funcion que sirve para barajar apartir de la libreria Underscore.js
     return baraja;
 };
 
 crearBaraja();
+
+
+
+//Tomar una nueva carta 
+const tomarCarta = () =>{
+    //Si se acaban las cartas en la baraja
+    if(baraja.length === 0){
+        throw 'No ahi cartas en la baraja'
+    }
+
+
+    const carta = baraja.pop();//Elimina el ultimo elemento de un array 
+    return carta;//retorna la carta  
+};
