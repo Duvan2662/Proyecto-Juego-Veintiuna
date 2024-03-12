@@ -21,9 +21,12 @@ const especiales = ['A','J','Q','K']; //Tipos de carta
 //Referencias del DOM
 const btnpedir          = document.querySelector('#btnPedir');
 const btndetener        = document.querySelector('#btnDetener');
+const btnuevo           = document.querySelector('#btnNuevo');
 const actualizarPuntos  = document.querySelectorAll('small');
 const barajaJugador     = document.querySelector('#jugador-cartas');
 const barajaComputadora = document.querySelector('#computadora-cartas');
+const divCartasJugador  = document.querySelector('#jugador-cartas');
+const divCartasComputadora  = document.querySelector('#computadora-cartas');
 
 
 
@@ -168,5 +171,20 @@ btndetener.addEventListener('click', ()=> {
     btndetener.disabled = true;//bloque el boton detener
     turnoComputadora (puntosJugador);//Funcion para que juege la computadora 
 })
+
+//Evento nuevo juego 
+btnuevo.addEventListener('click', ()=>{
+    btnpedir.disabled = false;//Desbloquea el boton pedir
+    btndetener.disabled = false;//Desbloquea el boton detener
+    actualizarPuntos[0].innerText = 0;//Resetea el valor
+    actualizarPuntos[1].innerText = 0;//Resetea el valor
+    puntosJugador     = 0;//Resetea el valor
+    puntosComputadora = 0 ;//Resetea el valor
+    baraja            = [];//Resetea la baraja
+    crearBaraja();//Crea nuevamente la baraja
+    divCartasJugador.innerHTML = '';//Quita las cartas del jugador
+    divCartasComputadora.innerHTML = '';//Quita las cartas de la computadora
+})
+
 
 
