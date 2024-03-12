@@ -10,6 +10,7 @@
 
 let baraja            = [];
 let puntosJugador     = 0;
+let puntosComputadora = 0 ;
 
 
 
@@ -21,6 +22,7 @@ const especiales = ['A','J','Q','K']; //Tipos de carta
 const btnpedir          = document.querySelector('#btnPedir');
 const actualizarPuntos  = document.querySelectorAll('small');
 const barajaJugador     = document.querySelector('#jugador-cartas');
+const barajaComputadora = document.querySelector('#computadora-cartas');
 
 
 
@@ -88,6 +90,46 @@ const valorCarta = (carta) => {
 
 
 
+//Turno de la computadora 
+const turnoComputadora = (puntosMinimos)=>{
+    do {
+        const carta = tomarCarta();
+        puntosComputadora = puntosComputadora + valorCarta(carta);
+        actualizarPuntos[1].innerText = puntosComputadora;//Se toma el small en su posicion 1 que es el small de la computadora  y se coloca el puntaje de la computadora 
+        
+        
+        //Logica para la creacion de la imagen en el HTML 
+        const imagenCarta = document.createElement('img');//Crea un elemento img de HTML
+        imagenCarta.classList.add('carta');//Se le asgina la clase de las cartas
+        imagenCarta.src = `necesario/Cartas/${carta}.jpg`;//Se le asigna la imagen 
+        barajaComputadora.append(imagenCarta);//Se coloca al final del elemento
+
+        if(puntosMinimos > 21){//Si lo puntos del jugador son mayor a 21 entonces la computadora gana con cualquier carta 
+            break; //Se sale del ciclo 
+        }
+
+    } while ((puntosComputadora < puntosMinimos) && (puntosMinimos<=21));//tiene que ser menor a los puntos del jugador Y (&&) puntos debe ser menor o igual a 21  
+
+
+    //Atento funcion de Javascript que me permite enviar este collback(Funcion que se envia como argumento) despues de un determindado tiemp
+    //En este caso 50 milsesimas de segundo
+    setTimeout(() => {
+        if(puntosComputadora === puntosMinimos){
+            alert('NADIE GANA :(');
+        }else if (puntosMinimos > 21) {
+            alert('COMPUTADORA GANA');
+        }else if (puntosComputadora > 21) {
+            alert('JUGADOR GANA');
+        } else {
+            alert('COMPUTADORA GANA');
+        }        
+    }, 50);//Modificar tiempo a su gusto
+    
+}
+
+
+
+
 //Eventos
 
 
@@ -103,8 +145,6 @@ btnpedir.addEventListener('click', () => {
     //Logica para la creacion de la imagen en el HTML 
     const imagenCarta = document.createElement('img');//Crea un elemento img de HTML
     imagenCarta.classList.add('carta');//Se le asgina la clase de las cartas
-    console.log('estoy aqui')
-    console.log({carta});
     imagenCarta.src = `necesario/Cartas/${carta}.jpg`;//Se le asigna la imagen 
     barajaJugador.append(imagenCarta);//Se coloca al final del elemento
 
@@ -113,10 +153,12 @@ btnpedir.addEventListener('click', () => {
         console.error('PERDISTE');
         btnpedir.disabled = true;//bloque el boton pedir
         btndetener.disabled = true;//bloque el boton detener
+        turnoComputadora(puntosJugador);//Funcion para que juege la computadora 
     }else if(puntosJugador === 21){
         console.warn('LLEGASTE A 21 GENIAL !!!!!!1');
         btnpedir.disabled = true;//bloque el boton pedir
         btndetener.disabled = true;//bloque el boton detener
+        turnoComputadora(puntosJugador);//Funcion para que juege la computadora 
     }
     
 })
