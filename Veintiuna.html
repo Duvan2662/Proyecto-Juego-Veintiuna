@@ -4,8 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veintiuna</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/necesario/Css/estilos.css">
 </head>
 <body>
+    
+    <header class="titulo">
+        21 🃏
+    </header>
+
+    <div class="row mt-2">
+        <div id="Botones" class="col text-center">
+            <button id="btnNuevo" class="btn btn-danger">Nuevo Juego</button>
+            <button id="btnPedir" class="btn btn-primary">Pedir Carta</button>
+            <button id="btnDetener" class="btn btn-primary">Detener</button>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="col">
+            <h1>Jugador - <small>0</small></h1>
+            <div id="jugador-cartas">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row container mt-2">
+        <div class="col">
+            <h1>Computadora - <small>0</small></h1>
+            <div id="computadora-cartas">
+            </div>
+
+        </div>
+    </div>
+
+    <script src="necesario/JavaScript/underscore-min.js"></script> <!--Sirve para barajar las cartas es una libreria externa que se llama underscore.js -->
+    <script src="necesario/JavaScript/juego.js"></script>
     
 </body>
 </html>
