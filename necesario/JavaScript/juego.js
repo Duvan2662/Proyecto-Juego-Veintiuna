@@ -168,10 +168,10 @@ const modulo = ( ()=>{
         crearJuego();
     })
 
-    //Retorno de la funcion
     return {
         nuevoJuego : crearJuego
     };
+
 })();
 
 
