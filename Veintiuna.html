@@ -21,8 +21,8 @@
     <div class="row mt-2">
         <div id="Botones" class="col text-center">
             <button id="btnNuevo" class="btn btn-danger btn-lg" >Nuevo Juego</button>
-            <button id="btnPedir" class="btn btn-primary btn-lg">Pedir Carta</button>
-            <button id="btnDetener" class="btn btn-primary btn-lg">Detener</button>
+            <button id="btnPedir" disabled = "disabled" class="btn btn-primary btn-lg">Pedir Carta</button>
+            <button id="btnDetener" disabled = "disabled" class="btn btn-primary btn-lg">Detener</button>
         </div>
         
     </div>
@@ -53,6 +53,11 @@
 
     <script src="necesario/JavaScript/underscore-min.js"></script> <!--Sirve para barajar las cartas es una libreria externa que se llama underscore.js -->
     <script src="necesario/JavaScript/juego.js"></script>
+    <script>//Script para desplegar el juego
+        document.querySelector('#btnNuevo').addEventListener('click',() =>{
+            modulo.nuevoJuego();
+        })
+    </script>
     
 </body>
 </html>

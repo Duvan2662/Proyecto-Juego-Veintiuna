@@ -6,7 +6,7 @@
 */
 
 
-( ()=>{
+const modulo = ( ()=>{
     'use strict'
 
     let baraja          = [],
@@ -30,9 +30,14 @@
     //Funcion que inicia el juego 
     const crearJuego = (numeroJugadores = 2) => {
         baraja = crearBaraja();
+        puntosJugadores = [];
         for (let i = 0; i < numeroJugadores; i++) {
             puntosJugadores.push(0); 
         }
+        actualizarPuntos.forEach(ele => ele.innerText = 0);//Me permite inicialiar los puntajes en 0 de los jugadores y la computadora 
+        divCartas.forEach(ele => ele.innerHTML ="" );//Me permite borrar las cartas del juego anterior
+        btnpedir.disabled = false;//Desbloquea el boton pedir
+        btndetener.disabled = false;//Desbloquea el boton detener
     }
 
     //Crear baraja de cartas
@@ -76,7 +81,6 @@
             }else{
                 puntos = 10;
             }
-
         }else{
             //Entra si ES un numero el valor 
             puntos = parseInt(valor,10); //Paso el valor a entero 
@@ -100,22 +104,8 @@
         divCartas[turno].append(imagenCarta); 
     }
 
-    //Turno de la computadora 
-    const turnoComputadora = (puntosMinimos)=>{
-        let puntosComputadora = 0;
-
-        do {
-            const carta = tomarCarta();
-            puntosComputadora = acumularPuntos(carta,puntosJugadores.length-1);
-            asignarImagenCarta(carta,puntosJugadores.length-1);
-            
-            if(puntosMinimos > 21){//Si lo puntos del jugador son mayor a 21 entonces la computadora gana con cualquier carta 
-                break; //Se sale del ciclo 
-            }
-
-        } while ((puntosComputadora < puntosMinimos) && (puntosMinimos<=21));//tiene que ser menor a los puntos del jugador Y (&&) puntos debe ser menor o igual a 21  
-
-
+    //Funcion que me determina quien gana 
+    const determinarGanador = (puntosComputadora,puntosMinimos)=> {
         //Atento funcion de Javascript que me permite enviar este collback(Funcion que se envia como argumento) despues de un determindado tiemp
         //En este caso 50 milsesimas de segundo
         setTimeout(() => {
@@ -129,7 +119,19 @@
                 alert('COMPUTADORA GANA');
             }        
         }, 50);//Modificar tiempo a su gusto
-        
+    }
+
+    //Turno de la computadora 
+    const turnoComputadora = (puntosMinimos)=>{
+        let puntosComputadora = 0;
+
+        do {
+            const carta = tomarCarta();
+            puntosComputadora = acumularPuntos(carta,puntosJugadores.length-1);
+            asignarImagenCarta(carta,puntosJugadores.length-1);
+        } while ((puntosComputadora < puntosMinimos) && (puntosMinimos<=21));//tiene que ser menor a los puntos del jugador Y (&&) puntos debe ser menor o igual a 21  
+
+        determinarGanador(puntosComputadora,puntosMinimos);
     }
 
     //Eventos
@@ -138,7 +140,6 @@
     btnpedir.addEventListener('click', () => {
 
         const carta = tomarCarta();
-
         const puntosJugador = acumularPuntos(carta,0);
         asignarImagenCarta(carta,0);
         
@@ -154,27 +155,22 @@
         
     })
 
-
     //Evento de detener
     btndetener.addEventListener('click', ()=> {
         btnpedir.disabled = true;//bloque el boton pedir
         btndetener.disabled = true;//bloque el boton detener
-        turnoComputadora (puntosJugador);//Funcion para que juege la computadora 
+        turnoComputadora (puntosJugadores[0]);//Funcion para que juege la computadora 
     })
 
     //Evento nuevo juego 
     btnuevo.addEventListener('click', ()=>{
-        // btnpedir.disabled = false;//Desbloquea el boton pedir
-        // btndetener.disabled = false;//Desbloquea el boton detener
-        // actualizarPuntos[0].innerText = 0;//Resetea el valor
-        // actualizarPuntos[1].innerText = 0;//Resetea el valor
+        console.clear
         crearJuego();
-        console.clear;
-        // barajaJugador.innerHTML = '';//Quita las cartas del jugador
-        // barajaComputadora.innerHTML = '';//Quita las cartas de la computadora
     })
 
-
+    return {
+        nuevoJuego : crearJuego
+    };
 
 })();
 
