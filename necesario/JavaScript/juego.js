@@ -168,6 +168,7 @@ const modulo = ( ()=>{
         crearJuego();
     })
 
+    //Retorno de mi funcion modulo
     return {
         nuevoJuego : crearJuego
     };
